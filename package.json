@@ -1,0 +1,49 @@
+{
+  "name": "loc-power-search",
+  "version": "1.2.0",
+  "description": "Desktop power search interface for the Library of Congress API.",
+  "main": "main.js",
+  "author": "Squir",
+  "license": "MIT",
+  "scripts": {
+    "start": "electron .",
+    "dist": "electron-builder",
+    "pack": "electron-builder --dir"
+  },
+  "devDependencies": {
+    "electron": "^30.0.0",
+    "electron-builder": "^24.6.4"
+  },
+  "build": {
+    "appId": "com.squir.locpowersearch",
+    "productName": "LOC Power Search",
+    "asar": true,
+    "files": [
+      "!dist/**/*",
+      "!out/**/*",
+      "!*.log"
+    ],
+    "directories": {
+      "output": "dist"
+    },
+    "win": {
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64"
+          ]
+        }
+      ],
+      "artifactName": "LOC-Power-Search-${version}-Setup.${ext}",
+      "signAndEditExecutable": false
+    },
+    "nsis": {
+      "oneClick": false,
+      "perMachine": false,
+      "allowToChangeInstallationDirectory": true
+    }
+  }
+}
+
+

@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LOC Power Search</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="background">
+        <div class="background__texture"></div>
+        <div class="background__gradient"></div>
+        <div class="background__overlay"></div>
+    </div>
+    <header class="app-header">
+        <div class="app-header__branding">
+            <h1>Library of Congress Power Search</h1>
+            <p>High-performance explorer for the LOC digital collections.</p>
+        </div>
+        <div class="app-header__api-key">
+            <label for="api-key-input">API Key</label>
+            <div class="api-key-input">
+                <input id="api-key-input" type="password" placeholder="Paste your LOC API key">
+                <button id="save-key" type="button">Save</button>
+            </div>
+            <div id="api-key-status" class="api-key-status" role="status" aria-live="polite"></div>
+            <small>Stored locally in your browser. Required for authenticated requests.</small>
+        </div>
+    </header>
+
+    <main class="app">
+        <section class="search-panel">
+            <form id="search-form" class="search-form">
+                <div class="form-group wide">
+                    <span class="group-label">Data Source</span>
+                    <div class="source-toggle" role="tablist" aria-label="Select data source">
+                        <button type="button" class="source-toggle__btn is-active" data-source="loc" role="tab" aria-selected="true">
+                            LOC Collections
+                        </button>
+                        <button type="button" class="source-toggle__btn" data-source="ppoc" role="tab" aria-selected="false">
+                            Prints &amp; Photographs (PPOC)
+                        </button>
+                    </div>
+                </div>
+
+                <div class="form-group wide">
+                    <label for="query">Search</label>
+                    <input id="query" type="text" placeholder="Enter keywords, names, subjects..." required>
+                </div>
+
+                <div class="form-group">
+                    <label for="collection">Collection</label>
+                    <select id="collection">
+                        <option value="search">All Collections</option>
+                        <option value="photos">Prints & Photographs</option>
+                        <option value="maps">Maps</option>
+                        <option value="newspapers">Newspapers</option>
+                        <option value="manuscripts">Manuscripts</option>
+                        <option value="books">Books</option>
+                        <option value="film-and-videos">Film & Video</option>
+                        <option value="audio">Audio Recordings</option>
+                        <option value="websites">Web Archives</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="format">Format Filter</label>
+                    <select id="format">
+                        <option value="">Any</option>
+                        <option value="original-format:Photograph">Photographs</option>
+                        <option value="original-format:Book">Books</option>
+                        <option value="original-format:Manuscript">Manuscripts</option>
+                        <option value="original-format:Audio">Audio</option>
+                        <option value="original-format:Video">Video</option>
+                        <option value="original-format:Cartographic">Maps</option>
+                        <option value="original-format:Periodical">Periodicals</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="language">Language</label>
+                    <input id="language" type="text" placeholder="e.g. English">
+                </div>
+
+                <div class="form-group">
+                    <label for="date-start">Date From</label>
+                    <input id="date-start" type="number" min="1000" max="2100" step="1" placeholder="YYYY">
+                </div>
+
+                <div class="form-group">
+                    <label for="date-end">Date To</label>
+                    <input id="date-end" type="number" min="1000" max="2100" step="1" placeholder="YYYY">
+                </div>
+
+                <div class="form-group">
+                    <label for="sort">Sort</label>
+                    <select id="sort">
+                        <option value="">Relevance</option>
+                        <option value="date">Date</option>
+                        <option value="title">Title</option>
+                        <option value="created">Created</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="page-size">Results Per Page</label>
+                    <select id="page-size">
+                        <option value="20">20</option>
+                        <option value="50">50</option>
+                        <option value="100">100</option>
+                    </select>
+                </div>
+
+                <div class="form-group wide">
+                    <label class="checkbox">
+                        <input id="has-location" type="checkbox">
+                        <span>Only records with online content</span>
+                    </label>
+                </div>
+
+                <div class="form-actions">
+                    <button id="search-button" type="submit">Run Search</button>
+                    <button id="reset-button" type="button">Reset</button>
+                </div>
+            </form>
+            <div class="search-meta">
+                <div id="search-status" class="search-status">Ready.</div>
+                <div id="search-tips" class="search-tips">
+                    <strong>Quick tips:</strong> Use quotes for exact phrases. Combine filters for precision. Try multiple collections.
+                </div>
+            </div>
+        </section>
+
+        <section class="results-panel">
+            <div class="results-toolbar">
+                <div id="results-summary" class="results-summary"></div>
+                <div class="pagination-controls">
+                    <button id="prev-page" type="button" disabled>&larr;</button>
+                    <span id="page-indicator">Page 1</span>
+                    <button id="next-page" type="button" disabled>&rarr;</button>
+                </div>
+                <div class="view-toggle" role="group" aria-label="View options">
+                    <button id="list-view-btn" type="button" class="view-toggle__btn is-active" data-view="list" aria-pressed="true">
+                        List View
+                    </button>
+                    <button id="gallery-view-btn" type="button" class="view-toggle__btn" data-view="gallery" aria-pressed="false">
+                        Gallery View
+                    </button>
+                </div>
+            </div>
+            <div id="results-list" class="results-list">
+                <div class="results-placeholder">
+                    <h3>Search the Library of Congress</h3>
+                    <p>Run a query to see richly formatted results with thumbnails, descriptions, and direct links back to loc.gov.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <template id="result-template">
+        <article class="result-card">
+            <div class="result-card__preview"></div>
+            <div class="result-card__content">
+                <h3 class="result-card__title"></h3>
+                <ul class="result-card__meta"></ul>
+                <p class="result-card__description"></p>
+                <div class="result-card__actions">
+                    <a class="result-card__link" href="#" target="_blank" rel="noopener">View at LOC</a>
+                    <button class="result-card__details" type="button">Details</button>
+                </div>
+            </div>
+        </article>
+    </template>
+
+    <template id="ppoc-result-template">
+        <article class="result-card result-card--image">
+            <div class="result-card__preview result-card__preview--large"></div>
+            <div class="result-card__content">
+                <h3 class="result-card__title"></h3>
+                <ul class="result-card__meta"></ul>
+                <p class="result-card__description"></p>
+                <div class="result-card__actions">
+                    <a class="result-card__link" href="#" target="_blank" rel="noopener">View Item</a>
+                    <button class="result-card__details" type="button">Image Details</button>
+                </div>
+            </div>
+        </article>
+    </template>
+
+    <template id="gallery-template">
+        <article class="gallery-card">
+            <div class="gallery-card__image"></div>
+            <div class="gallery-card__overlay">
+                <h3 class="gallery-card__title"></h3>
+                <button class="gallery-card__details" type="button">Details</button>
+            </div>
+        </article>
+    </template>
+
+    <dialog id="detail-dialog" class="detail-dialog">
+        <div class="detail-dialog__header">
+            <h3 id="detail-title">Record Details</h3>
+            <button id="close-dialog" type="button" aria-label="Close">&times;</button>
+        </div>
+        <div id="detail-content" class="detail-dialog__content">
+        </div>
+    </dialog>
+
+    <script src="app.js" type="module"></script>
+</body>
+</html>
