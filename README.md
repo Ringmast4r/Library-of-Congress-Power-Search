@@ -9,6 +9,8 @@ A powerful desktop search tool for the Library of Congress digital collections. 
 
 **Not affiliated with or endorsed by the Library of Congress.**
 
+![LOC Power Search Gallery View](capture.png)
+
 ## Why I Built This
 
 The Library of Congress has an incredible digital collection, but their default search interface makes it difficult to browse visually and explore large result sets efficiently. I discovered they offer API access (with free API keys available), so I built this desktop application to provide a superior search experience.
