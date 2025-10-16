@@ -461,8 +461,11 @@ function setApiIndicator(hasKey) {
         }
         mini.style.display = hasKey ? 'inline-flex' : 'none';
         if (hasKey) {
-            setTimeout(() => container.classList.add('is-collapsed'), 800);
+            // Hide the warning indicator immediately when key is present
+            el.style.display = 'none';
+            setTimeout(() => container.classList.add('is-collapsed'), 100);
         } else {
+            el.style.display = 'block';
             container.classList.remove('is-collapsed');
         }
     }
@@ -1129,7 +1132,7 @@ function updateSummary(response, filteredCount) {
         const hits = response?.search?.hits ?? state.total;
         elements.summary.textContent = `Showing ${state.filteredResults.length} image${state.filteredResults.length === 1 ? '' : 's'} on this page | Total matches: ${hits.toLocaleString()}`;
     } else {
-        const count = response?.results?.length ?? filteredCount ?? 0;
+        const count = response?.results?.length ?? state.rawResults.length ?? 0;
         elements.summary.textContent = `Showing ${filteredCount} of ${count} records on this page | Total matches: ${state.total.toLocaleString()}`;
     }
 }
