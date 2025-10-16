@@ -1,8 +1,8 @@
 ﻿# LOC Power Search
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![GitHub release](https://img.shields.io/github/v/release/Ringmast4r/Library-of-Congress-Power-Search-)](https://github.com/Ringmast4r/Library-of-Congress-Power-Search-/releases)
-[![Platform](https://img.shields.io/badge/platform-Windows%20%7C%20macOS%20%7C%20Linux-blue)](https://github.com/Ringmast4r/Library-of-Congress-Power-Search-)
+[![GitHub release](https://img.shields.io/github/v/release/Ringmast4r/Library-of-Congress-Power-Search)](https://github.com/Ringmast4r/Library-of-Congress-Power-Search/releases)
+[![Platform](https://img.shields.io/badge/platform-Windows%20%7C%20macOS%20%7C%20Linux-blue)](https://github.com/Ringmast4r/Library-of-Congress-Power-Search)
 [![Electron](https://img.shields.io/badge/Electron-30.5.1-47848F?logo=electron)](https://www.electronjs.org/)
 
 A powerful desktop search tool for the Library of Congress digital collections. I wanted a better way to search the Library of Congress - something faster and more visual than the default web interface. This application delivers exactly that.
@@ -51,8 +51,8 @@ PPOC is image-first by design; for LOC Collections, the gallery view automatical
 ### Windows (Recommended)
 
 **Option 1: Download the Installer (Easiest)**
-1. Go to [Releases](https://github.com/Ringmast4r/Library-of-Congress-Power-Search-/releases)
-2. Download `LOC-Power-Search-Setup.exe`
+1. Go to [Releases](https://github.com/Ringmast4r/Library-of-Congress-Power-Search/releases)
+2. Download `LOC-Power-Search-1.2.0-Setup.exe`
 3. Run the installer
 4. Launch the application
 
