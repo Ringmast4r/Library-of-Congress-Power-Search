@@ -1130,10 +1130,12 @@ function updatePaginationControls() {
 function updateSummary(response, filteredCount) {
     if (state.source === 'ppoc') {
         const hits = response?.search?.hits ?? state.total;
-        elements.summary.textContent = `Showing ${state.filteredResults.length} image${state.filteredResults.length === 1 ? '' : 's'} on this page | Total matches: ${hits.toLocaleString()}`;
+        elements.summary.textContent = `Showing ${state.filteredResults.length} image${state.filteredResults.length === 1 ? '' : 's'} on this page | Total available: ${hits.toLocaleString()}`;
     } else {
-        const count = response?.results?.length ?? state.rawResults.length ?? 0;
-        elements.summary.textContent = `Showing ${filteredCount} of ${count} records on this page | Total matches: ${state.total.toLocaleString()}`;
+        const requestedCount = state.rawResults.length;
+        const visibleCount = filteredCount ?? state.filteredResults.length;
+        const totalInCollection = state.total;
+        elements.summary.textContent = `Showing ${visibleCount} results (${requestedCount} fetched, filtered for display) | Total in collection: ${totalInCollection.toLocaleString()}`;
     }
 }
 
