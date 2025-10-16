@@ -21,6 +21,11 @@ function createWindow() {
     shell.openExternal(url);
     return { action: 'deny' };
   });
+
+  // Ensure app quits when window is closed
+  win.on('closed', () => {
+    app.quit();
+  });
 }
 
 app.whenReady().then(() => {
